@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание 10Б</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+        }
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #6366f1;
+            transition: all 0.2s;
+        }
+        .group-btn {
+            transition: all 0.3s ease;
+        }
+        .group-btn.active {
+            background-color: #6366f1;
+            color: white;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+        [data-group] {
+            display: none;
+        }
+        .show-group {
+            display: block !important;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 text-slate-200">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-extrabold mb-2 tracking-tight text-white uppercase">
+                10Б КЛАСС
+            </h1>
+            <p class="text-sm opacity-50 font-semibold uppercase tracking-[0.2em] text-indigo-300">Социально-экономический профиль</p>
+        </header>
+
+        <!-- Переключатель групп -->
+        <div class="flex justify-center mb-10">
+            <div class="glass p-1 flex gap-1">
+                <button onclick="setGroup(1)" id="btn-g1" class="group-btn active px-6 py-2 rounded-xl font-bold text-sm">ГРУППА 1</button>
+                <button onclick="setGroup(2)" id="btn-g2" class="group-btn px-6 py-2 rounded-xl font-bold text-sm">ГРУППА 2</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- ПОНЕДЕЛЬНИК -->
+            <div class="glass p-5">
+                <h2 class="text-xl font-bold mb-4 text-indigo-400">Понедельник</h2>
+                <div class="space-y-3">
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок • 08:30-09:15</span><span>303</span></div>
+                        <div class="font-bold">Разговор о важном</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>324</span></div>
+                        <div class="font-bold">Обществознание</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>324</span></div>
+                        <div class="font-bold">Обществознание</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>324</span></div>
+                        <div class="font-bold">История</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>303</span></div>
+                        <div class="font-bold">Алгебра и начала мат. анализа</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>304</span></div>
+                        <div class="font-bold">Химия</div>
+                    </div>
+                    <div class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>320</span></div>
+                        <div class="font-bold">Физика</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ВТОРНИК -->
+            <div class="glass p-5">
+                <h2 class="text-xl font-bold mb-4 text-indigo-400">Вторник</h2>
+                <div class="space-y-3">
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>322</span></div><div class="font-bold">Русский язык</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>304</span></div><div class="font-bold">Биология</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>210/318</span></div><div class="font-bold">Английский язык</div></div>
+                </div>
+            </div>
+
+            <!-- СРЕДА -->
+            <div class="glass p-5">
+                <h2 class="text-xl font-bold mb-4 text-indigo-400">Среда</h2>
+                <div class="space-y-3">
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>322</span></div><div class="font-bold">Русский язык</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>310</span></div><div class="font-bold">География</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>310</span></div><div class="font-bold">Экономика</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>310</span></div><div class="font-bold">Индивид. проект</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>303</span></div><div class="font-bold">Вер. и статистика</div></div>
+                    
+                    <div data-group="1" class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 1</span><span>224</span></div>
+                        <div class="font-bold">Программирование</div>
+                    </div>
+                    
+                    <div data-group="2" class="lesson-card p-3 rounded-r-lg">
+                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 2</span><span>210</span></div>
+                        <div class="font-bold">Английский язык</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ЧЕТВЕРГ -->
+            <div class="glass p-5">
+                <h2 class="text-xl font-bold mb-4 text-indigo-400">Четверг</h2>
+                <div class="space-y-3">
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>303</span></div><div class="font-bold">Россия - мои горизонты</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>324</span></div><div class="font-bold">Обществознание</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>320</span></div><div class="font-bold">Физика</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>с/з №2</span></div><div class="font-bold">Физкультура</div></div>
+                    
+                    <div data-group="1">
+                        <div class="lesson-card p-3 rounded-r-lg mb-3">
+                            <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 1</span><span>210</span></div>
+                            <div class="font-bold italic">Английский язык</div>
+                        </div>
+                        <div class="lesson-card p-3 rounded-r-lg">
+                            <div class="flex justify-between text-xs opacity-50 mb-1"><span>8 Урок • Гр. 1</span><span>318</span></div>
+                            <div class="font-bold italic">Английский язык</div>
+                        </div>
+                    </div>
+
+                    <div data-group="2">
+                        <div class="lesson-card p-3 rounded-r-lg mb-3">
+                            <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 2</span><span>224</span></div>
+                            <div class="font-bold">Информатика</div>
+                        </div>
+                        <div class="lesson-card p-3 rounded-r-lg">
+                            <div class="flex justify-between text-xs opacity-50 mb-1"><span>8 Урок • Гр. 2</span><span>224</span></div>
+                            <div class="font-bold">Программирование</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПЯТНИЦА -->
+            <div class="glass p-5 border-t-2 border-indigo-500/20">
+                <h2 class="text-xl font-bold mb-4 text-indigo-400">Пятница</h2>
+                <div class="space-y-3">
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>324</span></div><div class="font-bold">История</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>221</span></div><div class="font-bold">ОБЗР</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>с/з №2</span></div><div class="font-bold">Физкультура</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>324</span></div><div class="font-bold">Обществознание</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
+                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
+                </div>
+            </div>
+
+            <!-- ЗВОНКИ -->
+            <div class="glass p-5">
+                <h2 class="text-sm font-black mb-4 uppercase tracking-[0.2em] opacity-40 italic">Сетка звонков</h2>
+                <div class="space-y-1 text-xs font-mono">
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>1.</span> <span>08:30 — 09:15</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>2.</span> <span>09:30 — 10:15</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>3.</span> <span>10:30 — 11:15</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>4.</span> <span>11:35 — 12:20</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>5.</span> <span>12:40 — 13:25</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>6.</span> <span>13:45 — 14:30</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>7.</span> <span>14:45 — 15:30</span></div>
+                    <div class="flex justify-between border-b border-white/5 py-1"><span>8.</span> <span>15:35 — 16:20</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-12 pb-10 text-center text-[10px] text-white/10 uppercase tracking-[0.5em]">
+            ГБОУ Школа №600 • Обновлено: <span id="last-update"></span>
+        </footer>
+    </div>
+
+    <script>
+        function setGroup(num) {
+            document.getElementById('btn-g1').classList.remove('active');
+            document.getElementById('btn-g2').classList.remove('active');
+            document.getElementById('btn-g' + num).classList.add('active');
+            
+            document.querySelectorAll('[data-group]').forEach(el => {
+                el.classList.remove('show-group');
+            });
+            
+            document.querySelectorAll('[data-group="' + num + '"]').forEach(el => {
+                el.classList.add('show-group');
+            });
+
+            localStorage.setItem('selectedGroup', num);
+        }
+
+        window.onload = () => {
+            const savedGroup = localStorage.getItem('selectedGroup') || 1;
+            setGroup(savedGroup);
+            document.getElementById('last-update').innerText = new Date().toLocaleDateString('ru-RU');
+        };
+    </script>
+</body>
+</html>
