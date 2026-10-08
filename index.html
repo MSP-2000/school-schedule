@@ -1,265 +1,250 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание 10Б</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-        }
-        .glass {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-        }
-        .lesson-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #6366f1;
-            transition: all 0.2s;
-        }
-        .lesson-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateX(4px);
-        }
-        .group-btn {
-            transition: all 0.3s ease;
-        }
-        .group-btn.active {
-            background-color: #6366f1;
-            color: white;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
-        }
-        .current-day {
-            border: 2px solid #6366f1 !important;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-        }
-        [data-group] {
-            display: none;
-        }
-        .show-group {
-            display: block !important;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d12">
+<title>Расписание 11Б · 2026–2027</title>
+<style>
+:root{
+  --bg:#090b10; --panel:#11141b; --panel2:#151923; --line:#252a35;
+  --text:#f4f5f7; --muted:#8f96a3; --accent:#8b7cf6; --accent2:#b5aaff;
+  --green:#69d39b; --yellow:#e9c46a; --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  background:
+    radial-gradient(circle at 15% -10%,rgba(139,124,246,.16),transparent 32rem),
+    radial-gradient(circle at 90% 20%,rgba(80,130,255,.08),transparent 28rem),
+    var(--bg);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+button{font:inherit}
+.container{width:min(1180px,calc(100% - 28px));margin:auto}
+header{padding:34px 0 22px}
+.topline{display:flex;justify-content:space-between;align-items:end;gap:20px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:800}
+h1{font-size:clamp(34px,6vw,58px);line-height:1;margin:7px 0 0;letter-spacing:-.045em}
+.subtitle{margin:10px 0 0;color:var(--muted);font-size:14px}
+.clock{color:var(--muted);font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
+.clock strong{display:block;color:var(--text);font-size:22px;letter-spacing:-.02em}
+.controls{
+  position:sticky;top:10px;z-index:10;margin:8px 0 22px;padding:8px;
+  display:flex;gap:7px;overflow:auto;background:rgba(17,20,27,.84);
+  backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);
+}
+.tab{
+  flex:0 0 auto;border:0;background:transparent;color:var(--muted);padding:10px 15px;
+  border-radius:10px;font-weight:750;cursor:pointer;transition:.18s;
+}
+.tab:hover{color:var(--text);background:#1a1e28}
+.tab.active{background:#e9e7ff;color:#171321}
+.group{
+  margin-left:auto;border-left:1px solid var(--line);padding-left:8px;display:flex;gap:5px;
+}
+.group .tab.active{background:var(--accent);color:white}
+.today{
+  display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-bottom:22px;
+}
+.hero,.next{
+  border:1px solid var(--line);background:linear-gradient(145deg,#151923,#10131a);
+  border-radius:20px;padding:22px;box-shadow:var(--shadow);
+}
+.hero-label{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:900}
+.hero h2{font-size:28px;margin:8px 0 4px;letter-spacing:-.03em}
+.hero .meta{color:var(--muted);font-size:14px}
+.hero-time{font-size:18px;margin-top:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.next-title{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:900}
+.next h3{margin:9px 0 4px;font-size:20px}
+.next p{margin:0;color:var(--muted);font-size:13px}
+.schedule{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.day{border:1px solid var(--line);background:rgba(17,20,27,.9);border-radius:18px;padding:17px;min-width:0}
+.day.current{border-color:rgba(139,124,246,.7);box-shadow:0 0 0 1px rgba(139,124,246,.12),0 18px 45px rgba(0,0,0,.22)}
+.day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.day-name{font-size:18px;font-weight:850;letter-spacing:-.02em}
+.today-badge{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#dcd8ff;background:rgba(139,124,246,.18);padding:5px 8px;border-radius:7px;font-weight:850}
+.lesson{
+  display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;
+  padding:11px 9px;border-top:1px solid rgba(255,255,255,.055);
+}
+.lesson:first-child{border-top:0}
+.num{font-size:12px;color:var(--muted);font-weight:800}
+.subject{font-weight:720;font-size:14px;line-height:1.25}
+.room{color:var(--muted);font-size:11px;text-align:right;white-space:nowrap}
+.time{display:block;color:#666d79;font-size:10px;margin-top:3px;font-variant-numeric:tabular-nums}
+.lesson.split{background:rgba(139,124,246,.055);border-radius:10px;margin:2px 0}
+.split-line{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.badge{font-size:9px;padding:3px 6px;border-radius:5px;background:rgba(139,124,246,.17);color:#c9c2ff;font-weight:900;text-transform:uppercase}
+.bells{margin-top:14px;border:1px solid var(--line);background:#0e1117;border-radius:18px;padding:18px}
+.bells h2{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin:0 0 12px}
+.bell-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.bell{display:flex;justify-content:space-between;gap:10px;padding:8px 9px;border:1px solid #1e232c;border-radius:9px;font-size:11px;color:var(--muted)}
+.bell b{color:var(--text);font-weight:800}
+footer{padding:26px 0 38px;text-align:center;color:#555c68;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.hidden{display:none!important}
+@media(max-width:760px){
+  .container{width:min(100% - 18px,1180px)}
+  header{padding-top:22px}.topline{align-items:start}.clock{display:none}
+  .controls{top:6px}.group{margin-left:0}
+  .today{grid-template-columns:1fr}
+  .schedule{grid-template-columns:1fr}
+  .day{padding:14px}
+  .bell-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:430px){
+  .lesson{grid-template-columns:34px 1fr}.room{grid-column:2;text-align:left}
+  .group{border-left:0;padding-left:0}
+}
+</style>
 </head>
-<body class="p-4 md:p-8 text-slate-200">
-
-    <div class="max-w-6xl mx-auto">
-        <header class="text-center mb-6">
-            <h1 class="text-4xl font-extrabold mb-2 tracking-tight text-white uppercase">
-                10Б КЛАСС
-            </h1>
-            <p class="text-sm opacity-50 font-semibold uppercase tracking-[0.2em] text-indigo-300">Социально-экономический профиль</p>
-        </header>
-
-        <!-- Переключатель групп -->
-        <div class="flex justify-center mb-10">
-            <div class="glass p-1 flex gap-1">
-                <button onclick="setGroup(1)" id="btn-g1" class="group-btn px-6 py-2 rounded-xl font-bold text-sm">ГРУППА 1</button>
-                <button onclick="setGroup(2)" id="btn-g2" class="group-btn px-6 py-2 rounded-xl font-bold text-sm">ГРУППА 2</button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- ПОНЕДЕЛЬНИК -->
-            <div id="day-1" class="glass p-5">
-                <h2 class="text-xl font-bold mb-4 text-indigo-400 flex justify-between">Понедельник <span class="day-label text-xs hidden text-indigo-300 bg-indigo-500/20 px-2 py-1 rounded">Сегодня</span></h2>
-                <div class="space-y-3">
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок • 08:30-09:15</span><span>303</span></div>
-                        <div class="font-bold">Разговор о важном</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>324</span></div>
-                        <div class="font-bold">Обществознание</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>324</span></div>
-                        <div class="font-bold">Обществознание</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>324</span></div>
-                        <div class="font-bold">История</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>303</span></div>
-                        <div class="font-bold">Алгебра и начала мат. анализа</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>304</span></div>
-                        <div class="font-bold">Химия</div>
-                    </div>
-                    <div class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>320</span></div>
-                        <div class="font-bold">Физика</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ВТОРНИК -->
-            <div id="day-2" class="glass p-5">
-                <h2 class="text-xl font-bold mb-4 text-indigo-400 flex justify-between">Вторник <span class="day-label text-xs hidden text-indigo-300 bg-indigo-500/20 px-2 py-1 rounded">Сегодня</span></h2>
-                <div class="space-y-3">
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>322</span></div><div class="font-bold">Русский язык</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>210/318</span></div><div class="font-bold">Английский язык</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>304</span></div><div class="font-bold">Биология</div></div>
-                </div>
-            </div>
-
-            <!-- СРЕДА -->
-            <div id="day-3" class="glass p-5">
-                <h2 class="text-xl font-bold mb-4 text-indigo-400 flex justify-between">Среда <span class="day-label text-xs hidden text-indigo-300 bg-indigo-500/20 px-2 py-1 rounded">Сегодня</span></h2>
-                <div class="space-y-3">
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>322</span></div><div class="font-bold">Русский язык</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>322</span></div><div class="font-bold">Литература</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>310</span></div><div class="font-bold">География</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>310</span></div><div class="font-bold">Экономика</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>310</span></div><div class="font-bold">Индивид. проект</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>303</span></div><div class="font-bold">Вер. и статистика</div></div>
-                    
-                    <div data-group="1" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 1</span><span>224</span></div>
-                        <div class="font-bold">Программирование</div>
-                    </div>
-                    
-                    <div data-group="2" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 2</span><span>210</span></div>
-                        <div class="font-bold">Английский язык</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ЧЕТВЕРГ -->
-            <div id="day-4" class="glass p-5">
-                <h2 class="text-xl font-bold mb-4 text-indigo-400 flex justify-between">Четверг <span class="day-label text-xs hidden text-indigo-300 bg-indigo-500/20 px-2 py-1 rounded">Сегодня</span></h2>
-                <div class="space-y-3">
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>303</span></div><div class="font-bold">Россия - мои горизонты</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>324</span></div><div class="font-bold">Обществознание</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>320</span></div><div class="font-bold">Физика</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>с/з №2</span></div><div class="font-bold">Физкультура</div></div>
-                    
-                    <!-- 6 УРОК -->
-                    <div data-group="1" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок • Гр. 1</span><span>224</span></div>
-                        <div class="font-bold">Информатика</div>
-                    </div>
-                    <div data-group="2" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок • Гр. 2</span><span>318</span></div>
-                        <div class="font-bold italic">Английский язык</div>
-                    </div>
-
-                    <!-- 7 УРОК -->
-                    <div data-group="1" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 1</span><span>210</span></div>
-                        <div class="font-bold italic">Английский язык</div>
-                    </div>
-                    <div data-group="2" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок • Гр. 2</span><span>224</span></div>
-                        <div class="font-bold">Информатика</div>
-                    </div>
-
-                    <!-- 8 УРОК -->
-                    <div data-group="1" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>8 Урок • Гр. 1</span><span>318</span></div>
-                        <div class="font-bold italic">Английский язык</div>
-                    </div>
-                    <div data-group="2" class="lesson-card p-3 rounded-r-lg">
-                        <div class="flex justify-between text-xs opacity-50 mb-1"><span>8 Урок • Гр. 2</span><span>224</span></div>
-                        <div class="font-bold">Программирование</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ПЯТНИЦА -->
-            <div id="day-5" class="glass p-5">
-                <h2 class="text-xl font-bold mb-4 text-indigo-400 flex justify-between">Пятница <span class="day-label text-xs hidden text-indigo-300 bg-indigo-500/20 px-2 py-1 rounded">Сегодня</span></h2>
-                <div class="space-y-3">
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>1 Урок</span><span>324</span></div><div class="font-bold">История</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>2 Урок</span><span>221</span></div><div class="font-bold">ОБЗР</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>3 Урок</span><span>303</span></div><div class="font-bold">Геометрия</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>4 Урок</span><span>с/з №2</span></div><div class="font-bold">Физкультура</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>5 Урок</span><span>324</span></div><div class="font-bold">Обществознание</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>6 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
-                    <div class="lesson-card p-3 rounded-r-lg"><div class="flex justify-between text-xs opacity-50 mb-1"><span>7 Урок</span><span>303</span></div><div class="font-bold">Алгебра и начала мат. ан.</div></div>
-                </div>
-            </div>
-
-            <!-- ЗВОНКИ -->
-            <div class="glass p-5">
-                <h2 class="text-sm font-black mb-4 uppercase tracking-[0.2em] opacity-40 italic">Сетка звонков</h2>
-                <div class="space-y-1 text-xs font-mono">
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>1.</span> <span>08:30 — 09:15</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>2.</span> <span>09:30 — 10:15</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>3.</span> <span>10:30 — 11:15</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>4.</span> <span>11:35 — 12:20</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>5.</span> <span>12:40 — 13:25</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>6.</span> <span>13:45 — 14:30</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>7.</span> <span>14:45 — 15:30</span></div>
-                    <div class="flex justify-between border-b border-white/5 py-1"><span>8.</span> <span>15:35 — 16:20</span></div>
-                </div>
-            </div>
-
-        </div>
-
-        <footer class="mt-12 pb-10 text-center text-[10px] text-white/10 uppercase tracking-[0.5em]">
-            ГБОУ Школа №600 • Обновлено: <span id="last-update"></span>
-        </footer>
+<body>
+<div class="container">
+<header>
+  <div class="topline">
+    <div>
+      <div class="eyebrow">Школа №600 · 2026–2027</div>
+      <h1>11Б</h1>
+      <p class="subtitle">Расписание занятий</p>
     </div>
+    <div class="clock"><strong id="clock">--:--</strong><span id="date">--</span></div>
+  </div>
+</header>
 
-    <script>
-        function setGroup(num) {
-            // Кнопки
-            document.getElementById('btn-g1').classList.remove('active');
-            document.getElementById('btn-g2').classList.remove('active');
-            document.getElementById('btn-g' + num).classList.add('active');
-            
-            // Скрыть все элементы групп
-            document.querySelectorAll('[data-group]').forEach(el => {
-                el.classList.remove('show-group');
-            });
-            
-            // Показать выбранную
-            document.querySelectorAll('[data-group="' + num + '"]').forEach(el => {
-                el.classList.add('show-group');
-            });
+<nav class="controls" aria-label="Дни недели">
+  <button class="tab active" data-day="all">Вся неделя</button>
+  <button class="tab" data-day="1">Пн</button>
+  <button class="tab" data-day="2">Вт</button>
+  <button class="tab" data-day="3">Ср</button>
+  <button class="tab" data-day="4">Чт</button>
+  <button class="tab" data-day="5">Пт</button>
+  <div class="group">
+    <button class="tab" id="g1">Группа 1</button>
+    <button class="tab active" id="g2">Группа 2</button>
+  </div>
+</nav>
 
-            localStorage.setItem('selectedGroup', num);
-        }
+<section class="today" id="todayPanel">
+  <div class="hero">
+    <div class="hero-label" id="statusLabel">Сегодня</div>
+    <h2 id="currentSubject">Загрузка…</h2>
+    <div class="meta" id="currentRoom">—</div>
+    <div class="hero-time" id="currentTime">—</div>
+  </div>
+  <div class="next">
+    <div class="next-title">Следующий урок</div>
+    <h3 id="nextSubject">—</h3>
+    <p id="nextMeta">—</p>
+  </div>
+</section>
 
-        function highlightCurrentDay() {
-            const today = new Date().getDay(); // 0 - ВС, 1 - ПН...
-            if (today >= 1 && today <= 5) {
-                const dayCard = document.getElementById('day-' + today);
-                if (dayCard) {
-                    dayCard.classList.add('current-day');
-                    const label = dayCard.querySelector('.day-label');
-                    if (label) label.classList.remove('hidden');
-                }
-            }
-        }
+<main class="schedule" id="schedule"></main>
 
-        window.onload = () => {
-            // Установка группы
-            const savedGroup = localStorage.getItem('selectedGroup') || 1;
-            setGroup(savedGroup);
-            
-            // Подсветка дня
-            highlightCurrentDay();
-            
-            // Дата обновления
-            document.getElementById('last-update').innerText = new Date().toLocaleDateString('ru-RU');
-        };
-    </script>
+<section class="bells">
+  <h2>Сетка звонков</h2>
+  <div class="bell-grid" id="bells"></div>
+</section>
+
+<footer>ГБОУ Школа №600 · 11Б · Обновление расписания 2026–2027</footer>
+</div>
+
+<script>
+const schedule = [
+ {day:1,name:"Понедельник",lessons:[
+  ["Разговор о важном","303"],["Английский язык / Информатика","314 / 222",true],
+  ["Русский язык","319"],["Литература","319"],["Алгебра","303"],["Геометрия","303"],["В поисках аргументов","319"]
+ ]},
+ {day:2,name:"Вторник",lessons:[
+  ["Обществознание","307"],["География","305"],["Вероятность и статистика","303"],["Экономика","221"],["Алгебра","303"],["Геометрия","303"],["Физкультура","с/з №2"]
+ ]},
+ {day:3,name:"Среда",lessons:[
+  ["История","307"],["Обществознание","307"],["Физика","320"],["Английский язык","314"],["Право","307"],["Алгебра","303"],["Литература","319"]
+ ]},
+ {day:4,name:"Четверг",lessons:[
+  ["Физика","320"],["Обществознание","307"],["ОБЗР","221"],["Русский язык","319"],
+  ["Английский язык / Информатика","314 / 222",true],["История","307"],["Алгебра","303"],["Россия – мои горизонты","303"]
+ ]},
+ {day:5,name:"Пятница",lessons:[
+  ["Биология","321"],["Химия","304"],["Английский язык","314"],["Обществознание","307"],["Геометрия","303"],["Литература","319"],["Физкультура","с/з №2"]
+ ]}
+];
+
+const times=[
+ ["08:30","09:15"],["09:35","10:20"],["10:40","11:25"],["11:45","12:30"],
+ ["12:50","13:35"],["13:55","14:40"],["14:50","15:35"],["15:45","16:20"]
+];
+
+let group=localStorage.getItem("scheduleGroup")||"2";
+let selectedDay="all";
+
+function render(){
+ const root=document.getElementById("schedule");
+ root.innerHTML="";
+ schedule.forEach(d=>{
+   if(selectedDay!=="all" && selectedDay!==String(d.day)) return;
+   const card=document.createElement("section");
+   card.className="day"+(new Date().getDay()===d.day?" current":"");
+   card.dataset.day=d.day;
+   const today=new Date().getDay()===d.day;
+   card.innerHTML='<div class="day-head"><div class="day-name">'+d.name+'</div>'+(today?'<span class="today-badge">Сегодня</span>':"")+'</div>';
+   d.lessons.forEach((lesson,i)=>{
+     let subject=lesson[0], room=lesson[1], split=lesson[2];
+     if(split){
+       if(group==="1"){subject="Информатика";room="222"}
+       else {subject="Английский язык";room="314"}
+     }
+     const row=document.createElement("div");
+     row.className="lesson"+(split?" split":"");
+     row.innerHTML='<div class="num">'+(i+1)+'</div><div><div class="split-line"><span class="subject">'+subject+'</span>'+(split?'<span class="badge">группа '+group+'</span>':"")+'</div><span class="time">'+times[i][0]+'–'+times[i][1]+'</span></div><div class="room">'+room+'</div>';
+     card.appendChild(row);
+   });
+   root.appendChild(card);
+ });
+ document.querySelectorAll(".tab[data-day]").forEach(b=>b.classList.toggle("active",b.dataset.day===selectedDay));
+ document.getElementById("g1").classList.toggle("active",group==="1");
+ document.getElementById("g2").classList.toggle("active",group==="2");
+ updateToday();
+}
+
+function updateToday(){
+ const dow=new Date().getDay();
+ const day=schedule.find(d=>d.day===dow);
+ const now=new Date();
+ if(!day){document.getElementById("statusLabel").textContent="Сегодня выходной";document.getElementById("currentSubject").textContent="Занятий нет";document.getElementById("currentRoom").textContent="";document.getElementById("currentTime").textContent="";document.getElementById("nextSubject").textContent="До понедельника";document.getElementById("nextMeta").textContent="";return}
+ let idx=-1,next=-1;
+ const mins=now.getHours()*60+now.getMinutes();
+ day.lessons.forEach((_,i)=>{
+   const [h,m]=times[i][0].split(":").map(Number),[eh,em]=times[i][1].split(":").map(Number);
+   const start=h*60+m,end=eh*60+em;
+   if(mins>=start&&mins<end)idx=i;
+   if(next===-1&&mins<start)next=i;
+ });
+ const getLesson=i=>{
+   let [s,r,split]=day.lessons[i]; if(split){s=group==="1"?"Информатика":"Английский язык";r=group==="1"?"222":"314"} return {s,r};
+ };
+ if(idx>=0){
+   const l=getLesson(idx); document.getElementById("statusLabel").textContent="Сейчас · урок "+(idx+1);
+   document.getElementById("currentSubject").textContent=l.s;document.getElementById("currentRoom").textContent="Каб. "+l.r;document.getElementById("currentTime").textContent=times[idx][0]+"–"+times[idx][1];
+   if(next===-1) next=idx+1;
+ }else{
+   document.getElementById("statusLabel").textContent=mins<timeToMin(times[0][0])?"Сегодня · первый урок":"Сегодня";
+   document.getElementById("currentSubject").textContent=mins<timeToMin(times[0][0])?"Уроки ещё не начались":"Уроков сейчас нет";
+   document.getElementById("currentRoom").textContent=idx===-1&&mins>=timeToMin(times[6][1])?"На сегодня всё":"";
+   document.getElementById("currentTime").textContent="";
+ }
+ if(next>=0&&next<day.lessons.length){const l=getLesson(next);document.getElementById("nextSubject").textContent=l.s;document.getElementById("nextMeta").textContent=(next+1)+" урок · "+times[next][0]+"–"+times[next][1]+" · каб. "+l.r}
+ else {document.getElementById("nextSubject").textContent="На сегодня всё";document.getElementById("nextMeta").textContent="Можно жить дальше"}
+}
+function timeToMin(s){const [h,m]=s.split(":").map(Number);return h*60+m}
+function updateClock(){
+ const n=new Date();document.getElementById("clock").textContent=n.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
+ document.getElementById("date").textContent=n.toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"});
+}
+document.querySelectorAll(".tab[data-day]").forEach(b=>b.onclick=()=>{selectedDay=b.dataset.day;render();});
+document.getElementById("g1").onclick=()=>{group="1";localStorage.setItem("scheduleGroup",group);render()};
+document.getElementById("g2").onclick=()=>{group="2";localStorage.setItem("scheduleGroup",group);render()};
+render();updateClock();setInterval(()=>{updateClock();updateToday()},30000);
+</script>
 </body>
 </html>
